@@ -1,4 +1,44 @@
-export const tiles = {
+export type TyleZero = {
+  shape: [[number]];
+  color: string;
+};
+export type TyleTwo = {
+  shape: [
+    [number | string, number | string],
+    [number | string, number | string]
+  ];
+  color: string;
+};
+export type TyleThree = {
+  shape: [
+    [number | string, number | string, number | string],
+    [number | string, number | string, number | string],
+    [number | string, number | string, number | string]
+  ];
+  color: string;
+};
+export type TyleFour = {
+  shape: [
+    [number | string, number | string, number | string, number | string],
+    [number | string, number | string, number | string, number | string],
+    [number | string, number | string, number | string, number | string],
+    [number | string, number | string, number | string, number | string]
+  ];
+  color: string;
+};
+
+export type Tyles = {
+  0: TyleZero;
+  I: TyleFour;
+  J: TyleThree;
+  L: TyleThree;
+  O: TyleTwo;
+  S: TyleThree;
+  T: TyleThree;
+  Z: TyleThree;
+};
+
+export const tiles: Tyles = {
   0: { shape: [[0]], color: "0,0,0" },
   I: {
     shape: [
@@ -57,3 +97,10 @@ export const tiles = {
     color: "227, 78, 78"
   }
 };
+
+export function randomTile() {
+  const tilesArray = "IJLOSTZ";
+  const random = tilesArray[Math.floor(Math.random() * tilesArray.length)];
+
+  return tiles[random];
+}
