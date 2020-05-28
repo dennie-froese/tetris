@@ -1,27 +1,24 @@
 import React from "react";
 import Board from "../Board";
-import Display from "../Display";
-import StartButton from "../StartButton";
-import { STAGE_HEIGHT, STAGE_WIDTH } from "../../gameHelpers";
 
-interface TetrisProps {
-  boardWidth: number;
-  boardHeight: number;
-}
+import { BOARD_HEIGHT, BOARD_WIDTH } from "../../gameHelpers";
 
 export default function Tetris() {
-  const board = Array.from(Array(STAGE_HEIGHT), () =>
-    new Array(STAGE_WIDTH).fill([0, "clear"])
-  );
+  let field = [];
+
+  for (let y = 0; y < BOARD_HEIGHT; y++) {
+    let row = [];
+
+    for (let x = 0; x < BOARD_WIDTH; x++) {
+      row.push(0);
+    }
+
+    field.push(row);
+  }
+
   return (
-    <div>
-      <Board field={board} />
-      <aside>
-        <Display text="Score" />
-        <Display text="Rows" />
-        <Display text="Level" />
-        <StartButton />
-      </aside>
+    <div className="tetris">
+      <Board field={field} />
     </div>
   );
 }
