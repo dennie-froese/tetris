@@ -97,10 +97,3 @@ export const tiles: Tyles = {
     color: "227, 78, 78"
   }
 };
-
-export function randomTile() {
-  const tilesArray = "IJLOSTZ";
-  const random = tilesArray[Math.floor(Math.random() * tilesArray.length)];
-
-  return tiles[random];
-}
