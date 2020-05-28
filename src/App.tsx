@@ -1,11 +1,11 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Tetris from "./components/Tetris";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">Hello</header>
+      <Tetris />
     </div>
   );
 }
