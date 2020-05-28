@@ -7,8 +7,12 @@ export default function Tetris() {
   return (
     <div>
       <Stage />
-      <Display />
-      <StartButton />
+      <aside>
+        <Display text="Score" />
+        <Display text="Rows" />
+        <Display text="Level" />
+        <StartButton />
+      </aside>
     </div>
   );
 }

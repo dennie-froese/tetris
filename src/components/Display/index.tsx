@@ -1,5 +1,10 @@
 import React from "react";
 
-export default function Display() {
-  return <div>Display</div>;
+interface Props {
+  text: string;
+  gameOver?: boolean;
+}
+
+export default function Display({ text, gameOver }: Props) {
+  return <div>{text}</div>;
 }
