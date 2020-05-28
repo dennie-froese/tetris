@@ -1,5 +1,10 @@
 import React from "react";
 
-export default function Cell() {
-  return <div>cell</div>;
+interface Props {
+  key: number;
+  type: any;
+}
+
+export default function Cell({ key, type }: Props) {
+  return <div key={key}>cell</div>;
 }

@@ -1,12 +1,17 @@
 import React from "react";
-import Stage from "../Stage";
+import Board from "../Board";
 import Display from "../Display";
 import StartButton from "../StartButton";
+
+interface TetrisProps {
+  boardWidth: number;
+  boardHeight: number;
+}
 
 export default function Tetris() {
   return (
     <div>
-      <Stage />
+      <Board field={[]} />
       <aside>
         <Display text="Score" />
         <Display text="Rows" />
