@@ -11,8 +11,12 @@ export default function Tetris() {
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [activeTile, setActiveTile] = useState(1);
+  const [activeTileX, setActiveTileX] = useState(1);
+  const [activeTileY, setActiveTileY] = useState(1);
+  const [tileRotate, setTileRotate] = useState(0);
+  const [field, setField] = useState<number[][]>([]);
 
-  let field = [];
+  let fieldArray = [];
 
   for (let y = 0; y < BOARD_HEIGHT; y++) {
     let row = [];
@@ -21,8 +25,10 @@ export default function Tetris() {
       row.push(0);
     }
 
-    field.push(row);
+    fieldArray.push(row);
   }
+
+  setField(fieldArray);
 
   let startX = Math.floor(BOARD_WIDTH / 2);
 
