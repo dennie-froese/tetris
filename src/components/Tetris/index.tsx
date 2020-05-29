@@ -55,14 +55,27 @@ export default function Tetris() {
     let tile = activeTile;
 
     if (command === "left") {
+      xAdd = -1;
     }
     if (command === "right") {
+      xAdd = 1;
     }
     if (command === "down") {
+      yAdd = 1;
     }
     if (command === "rotate") {
+      rotateAdd = +1;
     }
-    return null;
+
+    let fieldVar = field;
+    let x = activeTileX;
+    let y = activeTileY;
+    let rotate = tileRotate;
+
+    fieldVar[y + tiles[tile][rotate][0][1]][x + tiles[tile][rotate][0][0]] = 0;
+    fieldVar[y + tiles[tile][rotate][1][1]][x + tiles[tile][rotate][1][0]] = 0;
+    fieldVar[y + tiles[tile][rotate][2][1]][x + tiles[tile][rotate][2][0]] = 0;
+    fieldVar[y + tiles[tile][rotate][3][1]][x + tiles[tile][rotate][3][0]] = 0;
   }
 
   return (
