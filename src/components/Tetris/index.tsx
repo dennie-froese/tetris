@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Board from "../Board";
 
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../gameHelpers";
 
 export default function Tetris() {
+  const [timer, setTimer] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [score, setScore] = useState(0);
+  const [level, setLevel] = useState(1);
+
   let field = [];
 
   for (let y = 0; y < BOARD_HEIGHT; y++) {
