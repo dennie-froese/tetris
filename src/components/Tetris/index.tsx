@@ -22,6 +22,31 @@ export default function Tetris() {
     field.push(row);
   }
 
+  let startX = Math.floor(BOARD_WIDTH / 2);
+
+  useEffect(() => {
+    let time = window.setInterval(
+      () => handleBoardUpdate("down"),
+      1000 - (level * 10 > 600 ? 600 : level * 10)
+    );
+    setTimer(time);
+  }, []);
+
+  function handleBoardUpdate(command: string) {
+    if (gameOver || isPaused) {
+      return;
+    }
+    if (command === "left") {
+    }
+    if (command === "right") {
+    }
+    if (command === "down") {
+    }
+    if (command === "rotate") {
+    }
+    return null;
+  }
+
   return (
     <div className="tetris">
       <Board field={field} />
