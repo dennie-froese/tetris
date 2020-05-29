@@ -76,6 +76,31 @@ export default function Tetris() {
     fieldVar[y + tiles[tile][rotate][1][1]][x + tiles[tile][rotate][1][0]] = 0;
     fieldVar[y + tiles[tile][rotate][2][1]][x + tiles[tile][rotate][2][0]] = 0;
     fieldVar[y + tiles[tile][rotate][3][1]][x + tiles[tile][rotate][3][0]] = 0;
+
+    let xAddIsValid = true;
+
+    if (xAdd !== 0) {
+      for (let i = 0; i <= 3; i++) {
+        if (
+          x + xAdd + tiles[tile][rotate][i][0] >= 0 &&
+          x + xAdd + tiles[tile][rotate][i][0] < BOARD_WIDTH
+        ) {
+          if (
+            field[y + tiles[tile][rotate][i][1]][
+              x + xAdd + tiles[tile][rotate][i][0]
+            ] !== 0
+          ) {
+            xAddIsValid = false;
+          }
+        } else {
+          xAddIsValid = false;
+        }
+      }
+    }
+
+    if (xAddIsValid) {
+      x += xAdd;
+    }
   }
 
   return (
