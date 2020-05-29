@@ -217,3 +217,5 @@ export const tiles: number[][][][] = [
     ]
   ]
 ];
+
+export default tiles;
