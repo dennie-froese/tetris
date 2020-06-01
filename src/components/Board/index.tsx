@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Cell from "../Cell";
 
 interface Props {
@@ -6,6 +6,7 @@ interface Props {
   gameOver?: boolean;
   score?: number;
   level?: number;
+  rotate?: number;
 }
 
 export default function Board({ field, gameOver, score, level }: Props) {

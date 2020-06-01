@@ -1,4 +1,4 @@
-export const tiles: number[][][][] = [
+export const tilesArr: number[][][][] = [
   // Each tile can be rotated 4 times (x/y coordinates)
   [
     // square
@@ -218,4 +218,4 @@ export const tiles: number[][][][] = [
   ]
 ];
 
-export default tiles;
+export default tilesArr;
