@@ -27,18 +27,13 @@ export type TileFour = {
   color: string;
 };
 
-export type Tiles = {
-  0: TileZero;
-  I: TileFour;
-  J: TileThree;
-  L: TileThree;
-  O: TileTwo;
-  S: TileThree;
-  T: TileThree;
-  Z: TileThree;
+type Keys = 0 | "I" | "J" | "L" | "O" | "S" | "T" | "Z";
+
+export type TilesType = {
+  [K in Keys]: TileZero | TileTwo | TileThree | TileFour;
 };
 
-export const TETROMINOS: Tiles = {
+export const tiles: TilesType = {
   0: { shape: [[0]], color: "0, 0, 0" },
   I: {
     shape: [
@@ -97,3 +92,10 @@ export const TETROMINOS: Tiles = {
     color: "227, 78, 78"
   }
 };
+
+export function randomTile() {
+  const tilesArray: Keys[] = ["I", "J", "L", "O", "S", "T", "Z"];
+  const random = tilesArray[Math.floor(Math.random() * tilesArray.length)];
+
+  return tiles[random];
+}
