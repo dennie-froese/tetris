@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { createBoard } from "../gameHelpers";
 
-export const useBoard = (player, resetPlayer) => {
+export const useBoard = (player: any, resetPlayer: any) => {
   const [board, setBoard] = useState(createBoard);
   const [rowsCleared, setRowsCleared] = useState(0);
 
   useEffect(() => {
     setRowsCleared(0);
-    const sweepRows = newBoard =>
-      newBoard.reduce((ack, row) => {
-        if (row.findIndex(cell => cell[0] === 0) === -1) {
+    const sweepRows = (newBoard: any) =>
+      newBoard.reduce((ack: any, row: any) => {
+        if (row.findIndex((cell: any) => cell[0] === 0) === -1) {
           setRowsCleared(prev => prev + 1);
           ack.unshift(new Array(newBoard[0].length).fill([0, "clear"]));
           return ack;
@@ -18,13 +18,13 @@ export const useBoard = (player, resetPlayer) => {
         return ack;
       }, []);
 
-    const updateBoard = prevBoard => {
-      const newBoard = prevBoard.map(row =>
-        row.map(cell => (cell[1] === "clear" ? [0, "clear"] : cell))
+    const updateBoard = (prevBoard: any) => {
+      const newBoard = prevBoard.map((row: any) =>
+        row.map((cell: any) => (cell[1] === "clear" ? [0, "clear"] : cell))
       );
 
-      player.tile.forEach((row, y) => {
-        row.forEach((value, x) => {
+      player.tile.forEach((row: any, y: any) => {
+        row.forEach((value: any, x: any) => {
           if (value !== 0) {
             newBoard[y + player.pos.y][x + player.pos.x] = [
               value,
