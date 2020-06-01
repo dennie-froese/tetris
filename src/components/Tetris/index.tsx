@@ -154,6 +154,19 @@ export default function Tetris() {
     if (yAddIsValid) {
       y += yAdd;
     }
+
+    fieldVar[y + tiles[tile][rotate][0][1]][
+      x + tiles[tile][rotate][0][0]
+    ] = tile;
+    fieldVar[y + tiles[tile][rotate][1][1]][
+      x + tiles[tile][rotate][1][0]
+    ] = tile;
+    fieldVar[y + tiles[tile][rotate][2][1]][
+      x + tiles[tile][rotate][2][0]
+    ] = tile;
+    fieldVar[y + tiles[tile][rotate][3][1]][
+      x + tiles[tile][rotate][3][0]
+    ] = tile;
   }
 
   return (
