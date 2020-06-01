@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Board from "../Board";
 
 import { BOARD_HEIGHT, BOARD_WIDTH } from "../../gameHelpers";
-import tiles from "../../tiles";
+import tilesArr from "../../tiles";
 
 export default function Tetris() {
   const [timer, setTimer] = useState(0);
@@ -14,28 +14,45 @@ export default function Tetris() {
   const [activeTileX, setActiveTileX] = useState(1);
   const [activeTileY, setActiveTileY] = useState(1);
   const [tileRotate, setTileRotate] = useState(0);
+  const [tileCount, setTileCount] = useState(0);
   const [field, setField] = useState<number[][]>([]);
+  const [tiles, setTiles] = useState<number[][][][]>([]);
 
-  let fieldArray = [];
+  let fieldArray: any = [];
 
-  for (let y = 0; y < BOARD_HEIGHT; y++) {
-    let row = [];
+  useEffect(() => {
+    for (let y = 0; y < BOARD_HEIGHT; y++) {
+      let row = [];
 
-    for (let x = 0; x < BOARD_WIDTH; x++) {
-      row.push(0);
+      for (let x = 0; x < BOARD_WIDTH; x++) {
+        row.push(0);
+      }
+
+      fieldArray.push(row);
     }
-
-    fieldArray.push(row);
-  }
-
-  setField(fieldArray);
+    setField(fieldArray);
+  }, []);
 
   let startX = Math.floor(BOARD_WIDTH / 2);
 
   useEffect(() => {
+    setActiveTileY(startX);
+    setActiveTileY(1);
+    setActiveTile(1);
+    setTileRotate(0);
+    setScore(0);
+    setLevel(1);
+    setTileCount(0);
+    setGameOver(false);
+    setIsPaused(false);
+    setTimer(0);
+    setTiles(tilesArr);
+  }, []);
+
+  useEffect(() => {
     let time = window.setInterval(
       () => handleBoardUpdate("down"),
-      1000 - (level * 10 > 600 ? 600 : level * 10)
+      100000 - (level * 10 > 600 ? 600 : level * 10)
     );
     setTimer(time);
 
@@ -167,11 +184,94 @@ export default function Tetris() {
     fieldVar[y + tiles[tile][rotate][3][1]][
       x + tiles[tile][rotate][3][0]
     ] = tile;
+
+    if (!yAddIsValid) {
+      for (let row = BOARD_HEIGHT - 1; row >= 0; row--) {
+        let isLineComplete = true;
+        for (let col = 0; col < BOARD_WIDTH; col++) {
+          if (field[row][col] === 0) {
+            isLineComplete = false;
+          }
+        }
+
+        if (isLineComplete) {
+          for (let yRowSrc = row; row > 0; row--) {
+            for (let col = 0; col < BOARD_WIDTH; col++) {
+              field[row][col] = field[row - 1][col];
+            }
+          }
+          row = BOARD_HEIGHT;
+        }
+      }
+    }
+
+    setScore(prevScore => prevScore + 1 * level);
+    setLevel(1 + Math.floor(tileCount / 10));
+    setTileCount(prevCount => prevCount + 1);
+
+    let time;
+
+    clearInterval(timer);
+
+    time = setInterval(
+      () => handleBoardUpdate("down"),
+      1000 - (level * 10 > 600 ? 600 : level * 10)
+    );
+
+    setTimer(time);
+
+    tile = Math.floor(Math.random() * 7 + 1);
+    x = BOARD_WIDTH / 2;
+    y = 1;
+    rotate = 0;
+
+    if (
+      field[y + tiles[tile][rotate][0][1]][x + tiles[tile][rotate][0][0]] !==
+        0 ||
+      field[y + tiles[tile][rotate][1][1]][x + tiles[tile][rotate][1][0]] !==
+        0 ||
+      field[y + tiles[tile][rotate][2][1]][x + tiles[tile][rotate][2][0]] !==
+        0 ||
+      field[y + tiles[tile][rotate][3][1]][x + tiles[tile][rotate][3][0]] !== 0
+    ) {
+      setGameOver(true);
+    } else {
+      field[y + tiles[tile][rotate][0][1]][
+        x + tiles[tile][rotate][0][0]
+      ] = tile;
+      field[y + tiles[tile][rotate][1][1]][
+        x + tiles[tile][rotate][1][0]
+      ] = tile;
+      field[y + tiles[tile][rotate][2][1]][
+        x + tiles[tile][rotate][2][0]
+      ] = tile;
+      field[y + tiles[tile][rotate][3][1]][
+        x + tiles[tile][rotate][3][0]
+      ] = tile;
+    }
+
+    setField(field);
+    setActiveTileX(x);
+    setActiveTileY(y);
+    setTileRotate(rotate);
+    setActiveTile(tile);
   }
+
+  function handlePauseClick() {
+    setIsPaused(prevPaused => !prevPaused);
+  }
+
+  function handleNewGameClick() {}
 
   return (
     <div className="tetris">
-      <Board field={field} />
+      <Board
+        field={field}
+        gameOver={gameOver}
+        score={score}
+        level={level}
+        rotate={tileRotate}
+      />
     </div>
   );
 }
