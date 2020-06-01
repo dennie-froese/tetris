@@ -49,42 +49,42 @@ html {
 }
 
 /* Styles for tiles */
-[class*="col-"] {
+[class*="cell-"] {
   padding: 12px;
   border: 1px solid #1a1c19;
 }
 
 /* Default (empty) board column */
-.col-0 {
+.cell-0 {
   background-color: #020202;
 }
 
 /* Colors for tiles */
-.col-1 {
+.cell-1 {
   background-color: #f21620;
 }
 
-.col-2 {
+.cell-2 {
   background-color: #10ac84;
 }
 
-.col-3 {
+.cell-3 {
   background-color: #5f27cd;
 }
 
-.col-4 {
+.cell-4 {
   background-color: #d925cf;
 }
 
-.col-5 {
+.cell-5 {
   background-color: #48dbfb;
 }
 
-.col-6 {
+.cell-6 {
   background-color: #fd4964;
 }
 
-.col-7 {
+.cell-7 {
   background-color: #72fa4e;
 }
 

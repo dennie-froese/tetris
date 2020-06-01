@@ -27,7 +27,7 @@ export type TileFour = {
   color: string;
 };
 
-type Keys = 0 | "I" | "J" | "L" | "O" | "S" | "T" | "Z";
+export type Keys = 0 | "I" | "J" | "L" | "O" | "S" | "T" | "Z";
 
 export type TilesType = {
   [K in Keys]: TileZero | TileTwo | TileThree | TileFour;

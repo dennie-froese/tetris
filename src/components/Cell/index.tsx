@@ -1,10 +1,17 @@
 import React from "react";
+import { tiles, Keys } from "../../tiles";
 
 interface Props {
   key: number;
-  className: string;
+  className: Keys;
 }
 
 export default function Cell({ key, className }: Props) {
-  return <div className={className} key={key} />;
+  return (
+    <div
+      className={`cell-${className.toString()}`}
+      key={key}
+      style={{ color: tiles[className].color }}
+    />
+  );
 }
