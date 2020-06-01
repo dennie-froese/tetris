@@ -101,6 +101,34 @@ export default function Tetris() {
     if (xAddIsValid) {
       x += xAdd;
     }
+
+    let newRotate = rotate + rotateAdd > 3 ? 0 : rotate + rotateAdd;
+    let rotateIsValid = true;
+
+    if (rotateAdd !== 0) {
+      for (let i = 0; i <= 3; i++) {
+        if (
+          x + tiles[tile][newRotate][i][0] >= 0 &&
+          x + tiles[tile][newRotate][i][0] < BOARD_WIDTH &&
+          y + tiles[tile][newRotate][i][0] >= 0 &&
+          y + tiles[tile][newRotate][i][0] < BOARD_HEIGHT
+        ) {
+          if (
+            field[y + tiles[tile][newRotate][i][1]][
+              x + tiles[tile][newRotate][i][0]
+            ] !== 0
+          ) {
+            rotateIsValid = false;
+          }
+        } else {
+          rotateIsValid = false;
+        }
+      }
+    }
+
+    if (rotateIsValid) {
+      rotate = newRotate;
+    }
   }
 
   return (
