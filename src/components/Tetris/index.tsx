@@ -52,7 +52,7 @@ export default function Tetris() {
   useEffect(() => {
     let time = window.setInterval(
       () => handleBoardUpdate("down"),
-      100000 - (level * 10 > 600 ? 600 : level * 10)
+      1000 - (level * 10 > 600 ? 600 : level * 10)
     );
     setTimer(time);
 
@@ -88,6 +88,8 @@ export default function Tetris() {
     let x = activeTileX;
     let y = activeTileY;
     let rotate = tileRotate;
+    console.log(fieldVar);
+    console.log(field);
 
     fieldVar[y + tiles[tile][rotate][0][1]][x + tiles[tile][rotate][0][0]] = 0;
     fieldVar[y + tiles[tile][rotate][1][1]][x + tiles[tile][rotate][1][0]] = 0;
@@ -272,6 +274,32 @@ export default function Tetris() {
         level={level}
         rotate={tileRotate}
       />
+      <div className="tetris__block-controls">
+        <button className="btn" onClick={() => handleBoardUpdate("left")}>
+          Left
+        </button>
+
+        <button className="btn" onClick={() => handleBoardUpdate("down")}>
+          Down
+        </button>
+
+        <button className="btn" onClick={() => handleBoardUpdate("right")}>
+          Right
+        </button>
+
+        <button className="btn" onClick={() => handleBoardUpdate("rotate")}>
+          Rotate
+        </button>
+      </div>
+      <div className="tetris__game-controls">
+        <button className="btn" onClick={() => handleNewGameClick()}>
+          New Game
+        </button>
+
+        <button className="btn" onClick={() => handlePauseClick()}>
+          {isPaused ? "Resume" : "Pause"}
+        </button>
+      </div>
     </div>
   );
 }
