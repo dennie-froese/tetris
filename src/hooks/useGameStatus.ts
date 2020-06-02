@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 
-export const useGameStatus = (rowsCleared: number) => {
+export const useGameStatus = (rowsCleared: any) => {
   const [score, setScore] = useState(0);
   const [rows, setRows] = useState(0);
-  const [level, setLevel] = useState(0);
+  const [level, setLevel] = useState<any>(0);
 
   const linePoints = [40, 100, 300, 1200];
 
