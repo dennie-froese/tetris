@@ -1,5 +1,7 @@
 import React from "react";
 
-export default function StartButton() {
-  return <div>Start</div>;
-}
+const StartButton = ({ callback }: any) => (
+  <button onClick={callback}>Start Game</button>
+);
+
+export default StartButton;
