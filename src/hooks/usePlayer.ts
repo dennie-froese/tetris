@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 import { tiles, randomTile, TilesShapes } from "../tiles";
-import { BOARD_HEIGHT, checkCollision, BOARD_WIDTH } from "../gameHelpers";
+import { checkCollision, BOARD_WIDTH } from "../gameHelpers";
 
 type Keys = "pos" | "tile" | "collided";
 type KeysPosition = "y" | "x";
@@ -10,8 +10,10 @@ type PosObject = {
   [k in KeysPosition]: number;
 };
 
+type PlayerObjects = PosObject | TilesShapes | boolean;
+
 export type Player = {
-  [k in Keys]: PosObject | TilesShapes | boolean;
+  [k in Keys]: PlayerObjects;
 };
 
 export const usePlayer = () => {
@@ -58,7 +60,7 @@ export const usePlayer = () => {
   const resetPlayer = useCallback(() => {
     setPlayer({
       pos: { x: BOARD_WIDTH / 2 - 2, y: 0 },
-      tetromino: randomTile().shape,
+      tile: randomTile().shape,
       collided: false
     });
   }, []);
