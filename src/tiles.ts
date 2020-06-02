@@ -29,8 +29,10 @@ export type TileFour = {
 
 export type Keys = 0 | "I" | "J" | "L" | "O" | "S" | "T" | "Z";
 
+export type TilesShapes = TileZero | TileTwo | TileThree | TileFour;
+
 export type TilesType = {
-  [K in Keys]: TileZero | TileTwo | TileThree | TileFour;
+  [K in Keys]: TilesShapes;
 };
 
 export const tiles: TilesType = {
