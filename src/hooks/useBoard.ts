@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { createBoard } from "../gameHelpers";
 
 export const useBoard = (player: any, resetPlayer: any) => {
-  const [board, setBoard] = useState(createBoard);
-  const [rowsCleared, setRowsCleared] = useState(0);
+  const [board, setBoard] = useState<any>(createBoard);
+  const [rowsCleared, setRowsCleared] = useState<number>(0);
 
   useEffect(() => {
     setRowsCleared(0);
@@ -41,7 +41,7 @@ export const useBoard = (player: any, resetPlayer: any) => {
       return newBoard;
     };
 
-    setBoard(prev => updateBoard(prev));
+    setBoard((prev: any) => updateBoard(prev));
   }, [
     player.collided,
     player.pos.x,
