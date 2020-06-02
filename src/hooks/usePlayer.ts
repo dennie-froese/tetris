@@ -1,23 +1,36 @@
 import { useState, useCallback } from "react";
 
-import { tiles, randomTile, TilesShapes } from "../tiles";
+import {
+  tiles,
+  randomTile,
+  TileZero,
+  TileTwo,
+  TileThree,
+  TileFour
+} from "../tiles";
 import { checkCollision, BOARD_WIDTH } from "../gameHelpers";
 
 type Keys = "pos" | "tile" | "collided";
-type KeysPosition = "y" | "x";
+type KeysPosition = "x" | "y";
 
 type PosObject = {
   [k in KeysPosition]: number;
 };
 
-type PlayerObjects = PosObject | TilesShapes | boolean;
+type PlayerObjects =
+  | PosObject
+  | TileZero["shape"]
+  | TileTwo["shape"]
+  | TileThree["shape"]
+  | TileFour["shape"]
+  | boolean;
 
 export type Player = {
   [k in Keys]: PlayerObjects;
 };
 
 export const usePlayer = () => {
-  const [player, setPlayer] = useState<any>({
+  const [player, setPlayer] = useState<Player | undefined>({
     pos: { x: 0, y: 0 },
     tile: tiles[0].shape,
     collided: false
