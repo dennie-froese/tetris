@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 
 import { tiles, randomTile, TilesShapes } from "../tiles";
-import { BOARD_HEIGHT, checkCollision } from "../gameHelpers";
+import { BOARD_HEIGHT, checkCollision, BOARD_WIDTH } from "../gameHelpers";
 
 type Keys = "pos" | "tile" | "collided";
 type KeysPosition = "y" | "x";
@@ -46,4 +46,22 @@ export const usePlayer = () => {
     }
     setPlayer(clonedPlayer);
   }
+
+  const updatePlayerPos = ({ x, y, collided }: any) => {
+    setPlayer((prev: any) => ({
+      ...prev,
+      pos: { x: prev.pos.x += x, y: prev.pos.y += y },
+      collided
+    }));
+  };
+
+  const resetPlayer = useCallback(() => {
+    setPlayer({
+      pos: { x: BOARD_WIDTH / 2 - 2, y: 0 },
+      tetromino: randomTile().shape,
+      collided: false
+    });
+  }, []);
+
+  return [player, playerRotate, updatePlayerPos, resetPlayer];
 };
