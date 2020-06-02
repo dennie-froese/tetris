@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
-import Board from "../Board";
+import React, { useState } from "react";
 
 import { createBoard, checkCollision } from "../../gameHelpers";
+
 import { usePlayer } from "../../hooks/usePlayer";
 import { useBoard } from "../../hooks/useBoard";
 import { useGameStatus } from "../../hooks/useGameStatus";
 import { useInterval } from "../../hooks/useInterval";
+
+import Board from "../Board";
 import Display from "../Display";
 import StartButton from "../StartButton";
 
@@ -21,13 +23,13 @@ export default function Tetris() {
 
   // console.log("re-render");
 
-  const movePlayer = (dir: number) => {
+  const movePlayer = (dir: any) => {
     if (!checkCollision(player, board, { x: dir, y: 0 })) {
       updatePlayerPos({ x: dir, y: 0 });
     }
   };
 
-  const keyUp = (keyCode: number) => {
+  const keyUp = ({ keyCode }: any) => {
     if (!gameOver) {
       if (keyCode === 40) {
         setDropTime(1000 / (level + 1));
@@ -72,7 +74,7 @@ export default function Tetris() {
     drop();
   }, dropTime);
 
-  const move = (keyCode: number) => {
+  const move = ({ keyCode }: any) => {
     if (!gameOver) {
       if (keyCode === 37) {
         movePlayer(-1);
