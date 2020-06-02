@@ -50,13 +50,13 @@ html {
 
 /* Styles for tiles */
 [class*="cell-"] {
-  padding: 12px;
+  /* padding: 12px; */
   border: 1px solid #1a1c19;
 }
 
 /* Default (empty) board column */
 .cell-0 {
-  background-color: #020202;
+  background-color: #045502;
 }
 
 /* Colors for tiles */
