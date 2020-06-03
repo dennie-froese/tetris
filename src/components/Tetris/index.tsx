@@ -21,7 +21,7 @@ export default function Tetris() {
     rowsCleared
   });
 
-  // console.log("re-render");
+  console.log("re-render");
 
   const movePlayer = (dir: any) => {
     if (!checkCollision(player, board, { x: dir, y: 0 })) {
