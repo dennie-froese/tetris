@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { createBoard } from "../gameHelpers";
+import { Player } from "./usePlayer";
 
-export const useBoard = (player: any, resetPlayer: any) => {
-  const [board, setBoard] = useState<any>(createBoard);
+export type Board = number[][];
+
+export const useBoard = (player: Player, resetPlayer: any) => {
+  const [board, setBoard] = useState<Board>(createBoard);
   const [rowsCleared, setRowsCleared] = useState<number>(0);
 
   useEffect(() => {
@@ -42,13 +45,7 @@ export const useBoard = (player: any, resetPlayer: any) => {
     };
 
     setBoard((prev: any) => updateBoard(prev));
-  }, [
-    player.collided,
-    player.pos.x,
-    player.pos.y,
-    player.tetromino,
-    resetPlayer
-  ]);
+  }, [player.collided, player.pos.x, player.pos.y, player.tile, resetPlayer]);
 
   return [board, setBoard, rowsCleared];
 };
