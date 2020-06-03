@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, SetStateAction, Dispatch } from "react";
 
 import {
   tiles,
@@ -9,8 +9,8 @@ import {
   TileFour
 } from "../tiles";
 import { checkCollision, BOARD_WIDTH } from "../gameHelpers";
+import { Board } from "./useBoard";
 
-type Keys = "pos" | "tile" | "collided";
 type KeysPosition = "x" | "y";
 
 type PosObject = {
@@ -18,33 +18,35 @@ type PosObject = {
 };
 
 type PlayerObjects =
-  | PosObject
   | TileZero["shape"]
   | TileTwo["shape"]
   | TileThree["shape"]
-  | TileFour["shape"]
-  | boolean;
+  | TileFour["shape"];
 
 export type Player = {
-  [k in Keys]: PlayerObjects;
+  pos: PosObject;
+  tile: PlayerObjects;
+  collided: boolean;
 };
 
+export type PlayerProps = Player | Dispatch<SetStateAction<Player>>;
+
 export const usePlayer = () => {
-  const [player, setPlayer] = useState<Player | undefined>({
+  const [player, setPlayer] = useState<Player>({
     pos: { x: 0, y: 0 },
     tile: tiles[0].shape,
     collided: false
   });
 
-  function rotate(matrix: any, dir: number) {
-    const mtrx = matrix.map((_: any, index: number) =>
+  function rotate(matrix: PlayerObjects[], dir: number) {
+    const mtrx = matrix.map((_: any[], index: number) =>
       matrix.map((column: any) => column[index])
     );
-    if (dir > 0) return mtrx.map((row: any) => row.reverse());
+    if (dir > 0) return mtrx.map((row: number[]) => row.reverse());
     return mtrx.reverse();
   }
 
-  function playerRotate(board: any, dir: number) {
+  function playerRotate(board: Board, dir: number) {
     const clonedPlayer = JSON.parse(JSON.stringify(player));
     clonedPlayer.tile = rotate(clonedPlayer.tile, dir);
 
@@ -62,12 +64,20 @@ export const usePlayer = () => {
     setPlayer(clonedPlayer);
   }
 
-  const updatePlayerPos = ({ x, y, collided }: any) => {
-    setPlayer((prev: any) => ({
-      ...prev,
-      pos: { x: prev.pos.x += x, y: prev.pos.y += y },
-      collided
-    }));
+  interface Props {
+    x: number;
+    y: number;
+    collided?: boolean;
+  }
+
+  const updatePlayerPos = ({ x, y, collided }: Props) => {
+    setPlayer(prev => {
+      return {
+        ...prev,
+        pos: { x: prev.pos.x += x, y: prev.pos.y += y },
+        collided
+      };
+    });
   };
 
   const resetPlayer = useCallback(() => {
