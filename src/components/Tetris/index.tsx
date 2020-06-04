@@ -15,7 +15,7 @@ export default function Tetris() {
   const [dropTime, setDropTime] = useState<number | null>(null);
   const [gameOver, setGameOver] = useState(false);
 
-  const [player, updatePlayerPos, resetPlayer, playerRotate] = usePlayer();
+  const [player, updatePlayerPos, playerRotate, resetPlayer] = usePlayer();
   const [board, setBoard, rowsCleared] = useBoard(player, resetPlayer);
   const [score, setScore, rows, setRows, level, setLevel] = useGameStatus({
     rowsCleared
