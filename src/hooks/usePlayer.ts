@@ -28,10 +28,30 @@ export type Player = {
   tile: PlayerObjects;
   collided: boolean;
 };
+interface Props {
+  x: number;
+  y: number;
+  collided: boolean;
+}
+
+type PlayerRotateFunc = (board: Board, dir: number) => void;
+type PlayerUpdateFunc = ({ x, y, collided }: Props) => void;
+type PlayerResetFunc = () => void;
+
+type Hook = () =>
+  | Player
+  | PlayerRotateFunc
+  | PlayerUpdateFunc
+  | PlayerResetFunc;
 
 export type PlayerProps = Player | Dispatch<SetStateAction<Player>>;
 
-export const usePlayer = () => {
+export const usePlayer = (): [
+  Player,
+  PlayerUpdateFunc,
+  PlayerRotateFunc,
+  PlayerResetFunc
+] => {
   const [player, setPlayer] = useState<Player>({
     pos: { x: 0, y: 0 },
     tile: tiles[0].shape,
@@ -64,20 +84,16 @@ export const usePlayer = () => {
     setPlayer(clonedPlayer);
   }
 
-  interface Props {
-    x: number;
-    y: number;
-    collided?: boolean;
-  }
-
   const updatePlayerPos = ({ x, y, collided }: Props) => {
-    setPlayer(prev => {
-      return {
-        ...prev,
-        pos: { x: prev.pos.x += x, y: prev.pos.y += y },
-        collided
-      };
-    });
+    setPlayer(
+      (prev): Player => {
+        return {
+          ...prev,
+          pos: { x: prev.pos.x += x, y: prev.pos.y += y },
+          collided
+        };
+      }
+    );
   };
 
   const resetPlayer = useCallback(() => {
@@ -88,5 +104,5 @@ export const usePlayer = () => {
     });
   }, []);
 
-  return [player, playerRotate, updatePlayerPos, resetPlayer];
+  return [player, updatePlayerPos, playerRotate, resetPlayer];
 };
