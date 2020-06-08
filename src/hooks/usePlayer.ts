@@ -17,7 +17,7 @@ type PosObject = {
   [k in KeysPosition]: number;
 };
 
-type PlayerObjects =
+export type PlayerObjects =
   | TileZero["shape"]
   | TileTwo["shape"]
   | TileThree["shape"]
