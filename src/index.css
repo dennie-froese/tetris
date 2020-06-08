@@ -41,8 +41,8 @@ html {
 
 /* Styles for tiles */
 [class*="cell-"] {
-  padding: 12px;
-  border: 1px solid;
+  /* padding: 12px; */
+  border: 1px solid #1a1c19;
 }
 
 /* Default (empty) board column */

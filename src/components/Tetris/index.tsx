@@ -23,7 +23,7 @@ export default function Tetris() {
 
   console.log("re-render");
 
-  const movePlayer = (dir: any) => {
+  const movePlayer = (dir: number) => {
     if (!checkCollision(player, board, { x: dir, y: 0 })) {
       updatePlayerPos({ x: dir, y: 0 });
     }
