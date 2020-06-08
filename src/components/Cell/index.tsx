@@ -1,19 +1,13 @@
 import React from "react";
-import { tiles, Keys } from "../../tiles";
+import { Keys } from "../../tiles";
 
 interface Props {
-  key: number;
+  keyVal: number;
   type: Keys;
 }
 
-function Cell({ key, type }: Props) {
-  return (
-    <div
-      className={`cell-${type.toString()}`}
-      key={key}
-      style={{ color: tiles[type].color }}
-    />
-  );
+function Cell({ keyVal, type }: Props) {
+  return <div className={`cell-${type}`} key={keyVal} />;
 }
 
 export default React.memo(Cell);
