@@ -1,17 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { createBoard } from "../gameHelpers";
-import { Player } from "./usePlayer";
+import { Player, PlayerResetFunc, PlayerObjects } from "./usePlayer";
 
 export type Board = number[][];
 
-export const useBoard = (player: Player, resetPlayer: any) => {
-  const [board, setBoard] = useState<Board>(createBoard);
+export const useBoard = (
+  player: Player,
+  resetPlayer: PlayerResetFunc
+): [Board, Dispatch<SetStateAction<number[][]>>, number] => {
+  const [board, setBoard] = useState<Board>(createBoard());
   const [rowsCleared, setRowsCleared] = useState<number>(0);
 
   useEffect(() => {
     setRowsCleared(0);
-    const sweepRows = (newBoard: any) =>
-      newBoard.reduce((ack: any, row: any) => {
+    const sweepRows = (newBoard: Board) =>
+      newBoard.reduce((ack: Board, row: number[]) => {
         if (row.findIndex((cell: any) => cell[0] === 0) === -1) {
           setRowsCleared(prev => prev + 1);
           ack.unshift(new Array(newBoard[0].length).fill([0, "clear"]));
@@ -21,13 +24,13 @@ export const useBoard = (player: Player, resetPlayer: any) => {
         return ack;
       }, []);
 
-    const updateBoard = (prevBoard: any) => {
-      const newBoard = prevBoard.map((row: any) =>
+    const updateBoard = (prevBoard: Board) => {
+      const newBoard = prevBoard.map((row: number[]) =>
         row.map((cell: any) => (cell[1] === "clear" ? [0, "clear"] : cell))
       );
 
-      player.tile.forEach((row: any, y: any) => {
-        row.forEach((value: any, x: any) => {
+      player.tile.forEach((row: any, y: number) => {
+        row.forEach((value: string | number, x: number) => {
           if (value !== 0) {
             newBoard[y + player.pos.y][x + player.pos.x] = [
               value,
@@ -44,7 +47,7 @@ export const useBoard = (player: Player, resetPlayer: any) => {
       return newBoard;
     };
 
-    setBoard((prev: any) => updateBoard(prev));
+    setBoard((prev: Board) => updateBoard(prev));
   }, [player.collided, player.pos.x, player.pos.y, player.tile, resetPlayer]);
 
   return [board, setBoard, rowsCleared];
