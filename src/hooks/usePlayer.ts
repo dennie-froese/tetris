@@ -26,23 +26,17 @@ export type PlayerObjects =
 export type Player = {
   pos: PosObject;
   tile: PlayerObjects;
-  collided: boolean;
+  collided?: boolean;
 };
 interface Props {
   x: number;
   y: number;
-  collided: boolean;
+  collided?: boolean;
 }
 
 type PlayerRotateFunc = (board: Board, dir: number) => void;
 type PlayerUpdateFunc = ({ x, y, collided }: Props) => void;
-type PlayerResetFunc = () => void;
-
-type Hook = () =>
-  | Player
-  | PlayerRotateFunc
-  | PlayerUpdateFunc
-  | PlayerResetFunc;
+export type PlayerResetFunc = () => void;
 
 export type PlayerProps = Player | Dispatch<SetStateAction<Player>>;
 
