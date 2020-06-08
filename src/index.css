@@ -30,11 +30,6 @@ html {
   width: 500px;
 }
 
-.tetris-board {
-  display: flex;
-  justify-content: space-between;
-}
-
 .tetris-board__info {
   width: 100px;
 }
@@ -44,14 +39,10 @@ html {
   color: #111;
 }
 
-.tetris-board__row {
-  display: flex;
-}
-
 /* Styles for tiles */
 [class*="cell-"] {
-  /* padding: 12px; */
-  border: 1px solid #1a1c19;
+  padding: 12px;
+  border: 1px solid;
 }
 
 /* Default (empty) board column */
@@ -60,31 +51,31 @@ html {
 }
 
 /* Colors for tiles */
-.cell-1 {
+.cell-J {
   background-color: #f21620;
 }
 
-.cell-2 {
+.cell-L {
   background-color: #10ac84;
 }
 
-.cell-3 {
+.cell-O {
   background-color: #5f27cd;
 }
 
-.cell-4 {
+.cell-S {
   background-color: #d925cf;
 }
 
-.cell-5 {
+.cell-T {
   background-color: #48dbfb;
 }
 
-.cell-6 {
+.cell-Z {
   background-color: #fd4964;
 }
 
-.cell-7 {
+.cell-O {
   background-color: #72fa4e;
 }
 
