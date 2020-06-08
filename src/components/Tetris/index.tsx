@@ -17,9 +17,9 @@ export default function Tetris() {
 
   const [player, updatePlayerPos, playerRotate, resetPlayer] = usePlayer();
   const [board, setBoard, rowsCleared] = useBoard(player, resetPlayer);
-  const [score, setScore, rows, setRows, level, setLevel] = useGameStatus({
+  const [score, setScore, rows, setRows, level, setLevel] = useGameStatus(
     rowsCleared
-  });
+  );
 
   console.log("re-render");
 
