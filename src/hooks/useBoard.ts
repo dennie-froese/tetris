@@ -1,6 +1,6 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { createBoard } from "../gameHelpers";
-import { Player, PlayerResetFunc, PlayerObjects } from "./usePlayer";
+import { Player, PlayerResetFunc } from "./usePlayer";
 
 export type Board = number[][];
 

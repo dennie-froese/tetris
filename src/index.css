@@ -30,6 +30,11 @@ html {
   width: 500px;
 }
 
+.tetris-board {
+  display: flex;
+  justify-content: space-between;
+}
+
 .tetris-board__info {
   width: 100px;
 }
@@ -42,12 +47,12 @@ html {
 /* Styles for tiles */
 [class*="cell-"] {
   /* padding: 12px; */
-  border: 1px solid #1a1c19;
+  border: 1px solid #6c6d6b;
 }
 
 /* Default (empty) board column */
 .cell-0 {
-  background-color: #045502;
+  background-color: #111;
 }
 
 /* Colors for tiles */
